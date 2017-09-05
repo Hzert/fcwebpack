@@ -1,0 +1,121 @@
+<div>
+    <!-- header 左侧logo -->
+    <div class="navHead">
+        <div class="logonWrap">
+            <h1 class="title">蜂巢</h1>
+            <a href="javascript:void(0);" class="">
+                <img src="../../img/ad-logo.png" height="100%" width="100%">
+            </a>
+            <!-- / brand -->
+        </div>
+        <!-- /header 左侧logo -->
+
+        <!-- header 右侧设置 -->
+        <div class="topNav">
+            <!-- nabar left -->
+            <ul class="nav navbar-nav m-l-lg newNav ">
+                <li><a href="javascript:void(0);"><img src="../../img/ad-logo.png" class="navImg"
+                                                       ng-mouseover="mouseIn()"/></a></li>
+                <li><a href="javascript:void(0);">{{user.userName}}<span class="sr-only"></span></a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        <div class="account-contain">
+                            <span>当前账户:</span>
+                            <span class="text-warning">{{accountName}}</span>
+                            <span class="text-warning"></span>
+                            <span class="caret"></span>
+                        </div>
+                    </a>
+                    <!--</div>-->
+                    <ul class="dropdown-menu" id='dropdownMenu' ng-show="accountList.length>0">
+                        <li ng-repeat="item in accountList"><span ng-click="changeAccount(item)">{{item.accountName}}</span>
+                        </li>
+                    </ul>
+                </li>
+                <li><a ng-click="goToAccountList()"><i class="iconfont icon-hourse">&#xe61a;</i></a></li>
+            </ul>
+            <!-- / nabar left -->
+
+            <!-- nabar right -->
+            <ul class="nav navbar-nav navbar-right newNav newNavR">
+                <li>
+                    <a ng-click="goNoticeCenter()" title="站内消息"><i class="icon iconfont">&#xe73d;</i></a>
+                    <span class="noticeWarn hidden"></span>
+                </li>
+                <!-- <li><a ui-sref="main.helpCenter" title="帮助中心"><i class="icon iconfont">&#xe609;</i></a></li> -->
+                <li>
+                    <a href="" title="账户收支"><i class="icon iconfont money">&#xe60a;</i></a>
+                    <!-- 以下是钱包图标上的小弹框 -->
+                    <!-- moneyLayer-ad是广告主的 -->
+                    <div class="moneyLayer moneyLayer-fl clear" ng-class={moneyDropdown:flLayerShow}>
+                        <div class="float-left">
+                            <p>账户余额</p>
+                            <p><span class="red-font">{{balance}}</span> 元</p>
+                        </div>
+                        <div class="float-left right-div">
+                            <p>冻结金额</p>
+                            <p><span class="red-font">{{iceMoney}}</span> 元</p>
+                        </div>
+                        <div class="float-left center-div">
+                            <p>昨日收入</p>
+                            <p><span class="red-font">{{yesterdayAmount}}</span> 元</p>
+                        </div>
+                        <div class="float-left">
+                            <p>本月收入</p>
+                            <p><span class="red-font">{{currentMonthTrade}}</span> 元</p>
+                        </div>
+                        <i></i>
+                    </div>
+                    <!-- moneyLayer-fl是流量主的 -->
+                    <div class="moneyLayer moneyLayer-ad clear" ng-class={moneyDropdown:adLayerShow}>
+                        <div class="float-left">
+                            <p>账户余额</p>
+                            <p><span class="red-font">{{balance}}</span> 元</p>
+                        </div>
+                        <div class="float-left right-div">
+                            <p>今日花费</p>
+                            <p><span class="red-font">{{costOfToday}}</span> 元</p>
+                        </div>
+                        <i></i>
+                    </div>
+                </li>
+                <li ng-repeat="item in fastMenu" class="fastMenu">
+                    <a class='setAdNv' ng-click="changeRouter(item.webviewUrl)"
+                       ng-class="{hover:currentRouter==item.webviewUrl}">
+                        <i class="iconfont">&#xe6fa;</i>{{item.icoFuncName}}
+                    </a>
+                </li>
+            </ul>
+            <!-- / navbar right -->
+
+        </div>
+        <!-- header 右侧设置 -->
+
+        <!-- 以下是头像图标上的小弹框 -->
+        <div class="userLayer" ng-class={dropdown:userLayerShow} ng-mouseleave="mouseEvent()">
+            <span class="defined-icon"></span>
+            <p class="haveBorder high-light" ng-show='isShowAccount'>
+                <a href="javascript:void(0);" ng-click="goUserInfo()" class="high-light">账户信息</a>
+            </p>
+            <p class="haveBorder high-light">
+                <a href="javascript:void(0);" ng-click="goChangePsd()" class="high-light">修改登录密码</a>
+            </p>
+            <p class="high-light">
+                <a href="javascript:void(0);" ng-click="cleanCookie()" class="high-light">退出</a>
+            </p>
+        </div>
+
+    </div>
+
+    <!--aside menu -->
+    <ul class="nav newAsideMenu">
+        <li ng-repeat="item in menuList">
+            <a href class="auto" ng-class="{hover:currentRouter==item.request}" ng-click="changeRouter(item.request)">
+                <i class="iconfont" ng-class="item.iconcls"></i>
+                <span style="font-weight: bolder">{{item.menuName}}</span>
+            </a>
+        </li>
+    </ul>
+    <div ui-view class="clear"></div>
+</div>
